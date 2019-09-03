@@ -9,4 +9,4 @@ use std::fs::File;
 
 pub fn yamlparser() {
 
-};
+}

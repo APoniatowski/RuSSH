@@ -7,8 +7,11 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde = "1.0.100"
-serde_derive = "1.0.100"
-serde_yaml = "0.8.9"
+yaml-rust = "0.4.3"
+strum = "0.16.0"
+strum_macros = "0.16.0"
+# serde = "1.0.100"
+# serde_derive = "1.0.100"
+# serde_yaml = "0.8.9"
 ssh2 = "0.3.3"
 async-log = "2.0.0"

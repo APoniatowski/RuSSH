@@ -1,30 +1,40 @@
 // mod libs;
 
 extern crate yaml_rust;
-// extern crate strum;
-// #[macro_use] extern crate strum_macros;
 
 // use std::env;  // To be able to add arguments, I will expand on this later
-use std::fs::File;
-use std::io::Read;
-use yaml_rust::{YamlLoader};
-// use std::string::ToString;
-// use strum_macros::{Display, EnumIter};
+use std::collections::BTreeMap;
+use std::error::Error;
+use std::fs::File; 
+use std::io::BufReader;
+use serde::Deserialize;
 
-// #[derive(Display, Debug)]
-// enum ServersYAML {
-//     Groups {Server: String {FQDN: String, Username: String, Password: String, SSHKey: String} },
+type Result<T> = std::result::Result<T, Box<dyn Error>>;
 
-// }
+#[derive(Deserialize, Debug)]
+struct Server {
+    FQDN: String,
+    Username: String,
+    Password: String,
+    Key_Path: String
+}
 
-fn main() {
-    // let args: Vec<String> = env::args().collect();  // collects args for future features
-    // println!("{:?}", args[0]);     // For debugging purposes
-    let mut yaml_config = File::open("config/config.yml").expect("File missing");
-    let mut yaml_data = String::new();
-    yaml_config.read_to_string(&mut yaml_data).expect("Cannot read file");
-    let Entries =  YamlLoader::load_from_str(&mut yaml_data).unwrap();
+type Group = BTreeMap<String, Vec<Server>>;
 
-    println!("{}", yaml_data);
-    println!("{:?}",Entries);
+fn main() -> Result<()> {
+    let file = BufReader::new(File::open("config/config.yml")?);
+    let groups: BTreeMap<String, Group> = serde_yaml::from_reader(file)?;
+
+    // println!("{:#?}", groups);
+    for (name, group) in groups {
+        println!("GROUP={} SIZE={}", name, group.len());
+        for (names, servers) in group {
+            println!("SERVER={} SIZE={}", names, servers.len());
+            for info in servers {
+                println!("INFO={:#?} ", info);
+            };
+        };
+    }
+    // println!{"{}", groups[0].Server[0].FQDN()};
+    Ok(())
 }

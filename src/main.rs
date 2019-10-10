@@ -1,7 +1,5 @@
 // mod libs;
 
-extern crate yaml_rust;
-
 // use std::env;  // To be able to add arguments, I will expand on this later
 use std::collections::BTreeMap;
 use std::error::Error;

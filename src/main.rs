@@ -9,6 +9,7 @@ use serde::Deserialize;
 
 type Result<T> = std::result::Result<T, Box<dyn Error>>;
 
+#[allow(non_snake_case)]
 #[derive(Deserialize, Debug)]
 struct Server {
     FQDN: String,
@@ -24,7 +25,7 @@ fn main() -> Result<()> {
     let file = BufReader::new(File::open("config/config.yml")?);
     let groups: BTreeMap<String, Group> = serde_yaml::from_reader(file)?;
 
-    // loop through the parsed data and pass it into SSH client, still planning on running servers in threads
+    // loop through the parsed data and pass it into SSH client, 
     for (name, group) in groups {
         println!("Starting with {}", name);
         for (names, servers) in group {

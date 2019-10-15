@@ -4,12 +4,14 @@ rust:
   - beta
   - nightly
 os:
+  - windows
   - linux
   - osx
 matrix:
   allow_failures:
     - rust: nightly
     - os: osx
+    - os: windows
   fast_finish: true
 script:
   - cargo build --verbose --all

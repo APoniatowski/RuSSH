@@ -31,11 +31,15 @@ environment:
 
 # Install Rust and Cargo
 install:
-  - curl -sSf -o rustup-init.exe https://win.rustup.rs
-  - rustup-init.exe --default-host %TARGET% --default-toolchain %CHANNEL% -y
-  - set PATH=%PATH%;C:\Users\appveyor\.cargo\bin
-  - rustc -Vv
-  - cargo -V
+  - IF "%BITS%" == "32" SET ARCH=i686
+  - IF "%BITS%" == "64" SET ARCH=x86_64
+  - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
+  - rustup-init -yv --default-toolchain %channel% --default-host %target%
+  - set PATH=C:\msys64\mingw%BITS%\bin;C:\msys64\usr\bin;%USERPROFILE%\.cargo\bin;%PATH%
+  - rustc -vV
+  - cargo -vV
+  - pacman --noconfirm -S mingw-w64-%ARCH%-gtk3 mingw-w64-%ARCH%-adwaita-icon-theme
+
 
 build: false
 

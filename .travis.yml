@@ -3,9 +3,13 @@ rust:
   - stable
   - beta
   - nightly
+os:
+  - linux
+  - osx
 matrix:
   allow_failures:
     - rust: nightly
+    - os: osx
   fast_finish: true
 script:
   - cargo build --verbose --all

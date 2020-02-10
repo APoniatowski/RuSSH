@@ -2,4 +2,4 @@
 **/*.rs.bk
 .project
 /.vscode
-/config
+/config/pool-testing.yml

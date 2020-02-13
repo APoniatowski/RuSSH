@@ -13,7 +13,8 @@ pub struct Server {
     pub FQDN: String,
     pub Username: String,
     pub Password: String,
-    pub Key_Path: String
+    pub Key_Path: String,
+    pub Port: String
 }
 
 pub type Group = BTreeMap<String, Vec<Server>>;

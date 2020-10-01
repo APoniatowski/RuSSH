@@ -10,5 +10,5 @@ edition = "2018"
 serde = { version = "1.0", features = ["derive"] }
 serde_derive = "1.0.101"
 serde_yaml = "0.8.11"
-ssh2 = "0.7.1"
+ssh2 = "0.8.2"
 # async-log = "2.0.0"

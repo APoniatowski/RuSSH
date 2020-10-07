@@ -23,3 +23,14 @@ pub fn parseyaml(fileloc: &str) -> BTreeMap<String, Group> {
     let file = BufReader::new(File::open(fileloc).unwrap());
     serde_yaml::from_reader(file).unwrap()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_parseyaml() {
+        let result = parseyaml("test_data/test_pool.yaml");
+        assert!(result.is_ok());
+    }
+}

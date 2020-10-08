@@ -2,7 +2,6 @@ extern crate serde_yaml;
 extern crate serde_derive;
 
 use std::collections::BTreeMap;
-// use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
 use serde::Deserialize;
@@ -30,7 +29,11 @@ mod tests {
 
     #[test]
     fn test_parseyaml() {
-        let result = parseyaml("test_data/test_pool.yaml");
-        assert!(result.is_ok());
+
+        let expected = r#"{"ServerGroup1": {"Server11": [Server { FQDN: "hostname11.whatever.com", Username: "user11", Password: "password11", Key_Path: "/path/to/key", Port: "22" }], "Server12": [Server { FQDN: "hostname12.whatever.com", Username: "user12", Password: "password12", Key_Path: "/path/to/key", Port: "2222" }]}, "ServerGroup2": {"Server21": [Server { FQDN: "hostname21.whatever.com", Username: "user21", Password: "password21", Key_Path: "/path/to/key", Port: "2233" }], "Server22": [Server { FQDN: "hostname22.whatever.com", Username: "user22", Password: "password22", Key_Path: "/path/to/key", Port: "2244" }]}}"#;   
+        let result: BTreeMap<String, Group> = parseyaml("test_data/test_pool.yml");
+        println!("{:?}", result);
+        println!("{:?}", expected);
+
     }
 }
